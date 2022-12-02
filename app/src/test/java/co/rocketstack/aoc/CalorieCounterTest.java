@@ -23,11 +23,11 @@ class CalorieCounterTest {
             String filepath = getClass().getResource("CalorieCounterSampleFile.input").getFile();
             CalorieCounter counter = new CalorieCounter(filepath);
 
-            Assert.assertEquals(counter.getCalorieCountForElf(0), 6000);
-            Assert.assertEquals(counter.getCalorieCountForElf(1), 4000);
-            Assert.assertEquals(counter.getCalorieCountForElf(2), 11000);
-            Assert.assertEquals(counter.getCalorieCountForElf(3), 24000);
-            Assert.assertEquals(counter.getCalorieCountForElf(4), 10000);
+            Assert.assertEquals(6000, counter.getCalorieCountForElf(0));
+            Assert.assertEquals(4000, counter.getCalorieCountForElf(1));
+            Assert.assertEquals(11000, counter.getCalorieCountForElf(2));
+            Assert.assertEquals(24000, counter.getCalorieCountForElf(3));
+            Assert.assertEquals(10000, counter.getCalorieCountForElf(4));
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -38,7 +38,7 @@ class CalorieCounterTest {
         String filepath = getClass().getResource("CalorieCounterSampleFile.input").getFile();
         CalorieCounter counter = new CalorieCounter(filepath);
 
-        Assert.assertEquals(counter.getHighestCalorieCount(), 24000);
+        Assert.assertEquals(24000, counter.getHighestCalorieCount());
     }
 
     @Test
@@ -46,7 +46,7 @@ class CalorieCounterTest {
         String filepath = getClass().getResource("CalorieCounterSampleFile.input").getFile();
         CalorieCounter counter = new CalorieCounter(filepath);
 
-        Assert.assertEquals(counter.getTheElfWithTheHighestCalorieCount(), 4);
+        Assert.assertEquals(4, counter.getTheElfWithTheHighestCalorieCount());
     }
 
     @Test
@@ -54,6 +54,6 @@ class CalorieCounterTest {
         String filepath = getClass().getResource("CalorieCounterSampleFile.input").getFile();
         CalorieCounter counter = new CalorieCounter(filepath);
 
-        Assert.assertEquals(counter.getTotalCalorieCountForTheTopNElves(3), 45000);
+        Assert.assertEquals(45000, counter.getTotalCalorieCountForTheTopNElves(3));
     }
 }
