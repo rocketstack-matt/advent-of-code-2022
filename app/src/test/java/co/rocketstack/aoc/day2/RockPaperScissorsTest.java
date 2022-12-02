@@ -1,9 +1,8 @@
-package co.rocketstack.aoc;
+package co.rocketstack.aoc.day2;
 
+import co.rocketstack.aoc.day2.RockPaperScissors;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RockPaperScissorsTest {
     @Test

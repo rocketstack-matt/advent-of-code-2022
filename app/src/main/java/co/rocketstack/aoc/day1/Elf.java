@@ -1,4 +1,4 @@
-package co.rocketstack.aoc;
+package co.rocketstack.aoc.day1;
 
 import lombok.Getter;
 

@@ -1,6 +1,5 @@
 package co.rocketstack.aoc.day2;
 
-import co.rocketstack.aoc.RockPaperScissors;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

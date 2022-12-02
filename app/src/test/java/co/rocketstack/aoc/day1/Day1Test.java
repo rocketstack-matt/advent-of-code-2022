@@ -1,6 +1,5 @@
 package co.rocketstack.aoc.day1;
 
-import co.rocketstack.aoc.CalorieCounter;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

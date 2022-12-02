@@ -1,5 +1,6 @@
-package co.rocketstack.aoc;
+package co.rocketstack.aoc.day1;
 
+import co.rocketstack.aoc.day1.CalorieCounter;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
