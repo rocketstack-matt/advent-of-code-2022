@@ -48,4 +48,12 @@ class CalorieCounterTest {
 
         Assert.assertEquals(counter.getTheElfWithTheHighestCalorieCount(), 4);
     }
+
+    @Test
+    void testGetCalorieCountForTop3Elves() throws FileNotFoundException {
+        String filepath = getClass().getResource("CalorieCounterSampleFile.input").getFile();
+        CalorieCounter counter = new CalorieCounter(filepath);
+
+        Assert.assertEquals(counter.getTotalCalorieCountForTheTopNElves(3), 45000);
+    }
 }

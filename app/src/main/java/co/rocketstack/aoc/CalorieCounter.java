@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CalorieCounter {
     List<Elf> elves = new ArrayList<>();
@@ -34,6 +35,10 @@ public class CalorieCounter {
     }
 
     public int getTheElfWithTheHighestCalorieCount() {
+        return getTheElfWithTheHighestCalorieCount(this.elves);
+    }
+
+    public int getTheElfWithTheHighestCalorieCount(List<Elf> elves) {
         Elf currentElf = elves.get(0);
         for (Elf elf : elves) {
             if (elf.getCalories() > currentElf.getCalories()) currentElf = elf;
@@ -41,5 +46,14 @@ public class CalorieCounter {
         return elves.indexOf(currentElf) + 1;
     }
 
+    public  int getTotalCalorieCountForTheTopNElves(int n) {
+        List<Elf> elves = this.elves;
+        List<Elf> elvesToCount = new ArrayList<>();
 
+        for(int i=0;i<n;i++) {
+            elvesToCount.add(elves.remove(getTheElfWithTheHighestCalorieCount(elves)-1));
+        }
+
+        return elvesToCount.stream().map(elf -> elf.getCalories()).collect(Collectors.summingInt(Integer::intValue));
+    }
 }
