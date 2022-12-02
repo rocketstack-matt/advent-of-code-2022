@@ -14,6 +14,19 @@ public enum RockPaperScissors {
             }
             return 0;
         }
+
+        @Override
+        int playFor(String result) {
+            switch (result) {
+                case "X":
+                    return RockPaperScissors.playHand(ROCK, SCISSORS);
+                case "Y":
+                    return RockPaperScissors.playHand(ROCK, ROCK);
+                case "Z":
+                    return RockPaperScissors.playHand(ROCK, PAPER);
+            }
+            return 0;
+        }
     },
     PAPER(2) {
         @Override
@@ -25,6 +38,19 @@ public enum RockPaperScissors {
                     return PAPER.score + 6;
                 case SCISSORS:
                     return PAPER.score;
+            }
+            return 0;
+        }
+
+        @Override
+        int playFor(String result) {
+            switch (result) {
+                case "X":
+                    return RockPaperScissors.playHand(PAPER, ROCK);
+                case "Y":
+                    return RockPaperScissors.playHand(PAPER, PAPER);
+                case "Z":
+                    return RockPaperScissors.playHand(PAPER, SCISSORS);
             }
             return 0;
         }
@@ -42,6 +68,19 @@ public enum RockPaperScissors {
             }
             return 0;
         }
+
+        @Override
+        int playFor(String result) {
+            switch (result) {
+                case "X":
+                    return RockPaperScissors.playHand(SCISSORS, PAPER);
+                case "Y":
+                    return RockPaperScissors.playHand(SCISSORS, SCISSORS);
+                case "Z":
+                    return RockPaperScissors.playHand(SCISSORS, ROCK);
+            }
+            return 0;
+        }
     };
 
     private int score;
@@ -52,8 +91,14 @@ public enum RockPaperScissors {
 
     abstract int play(RockPaperScissors hand);
 
+    abstract int playFor(String result);
+
     public static int playHand(RockPaperScissors opponentsHand, RockPaperScissors yourHand) {
         return yourHand.play(opponentsHand);
+    }
+
+    public static int playHandForResult(RockPaperScissors opponentsHand, String result) {
+        return opponentsHand.playFor(result);
     }
 
     public static RockPaperScissors getHand(String hand) {

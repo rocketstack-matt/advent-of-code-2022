@@ -23,4 +23,19 @@ public class Day2Test {
         }
         System.out.println(score);
     }
+
+    @Test
+    void getTotalScorePlayingForResult() throws FileNotFoundException {
+        String filepath = getClass().getResource("Day2.input").getFile();
+        Scanner scanner = new Scanner(new File(filepath));
+
+        int score = 0;
+        while (scanner.hasNextLine()) {
+            StringTokenizer tokenizer = new StringTokenizer(scanner.nextLine());
+            String opponentsHand = tokenizer.nextToken();
+            String desiredResult = tokenizer.nextToken();
+            score += RockPaperScissors.playHandForResult(RockPaperScissors.getHand(opponentsHand), desiredResult);
+        }
+        System.out.println(score);
+    }
 }
