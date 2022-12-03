@@ -22,4 +22,25 @@ public class Day3Test {
         }
         System.out.println(count);
     }
+
+    /**
+     * Find the item type that corresponds to the badges of each three-Elf group. What is the sum of the
+     * priorities of those item types?
+     */
+    @Test
+    void getPriorityBadgeTotal() throws FileNotFoundException {
+        String filepath = getClass().getResource("Day3.input").getFile();
+        Scanner scanner = new Scanner(new File(filepath));
+
+        int total = 0;
+        while (scanner.hasNextLine()) {
+            Rucksack rs1 = new Rucksack(scanner.nextLine());
+            Rucksack rs2 = new Rucksack(scanner.nextLine());
+            Rucksack rs3 = new Rucksack(scanner.nextLine());
+            BadgeChecker badgeChecker = new BadgeChecker(rs1, rs2, rs3);
+            total += badgeChecker.getBadgePriority();
+        }
+        System.out.println(total);
+    }
+
 }

@@ -26,8 +26,12 @@ public class Rucksack {
             return getCommonItem().toCharArray()[0] - 96;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Integer.valueOf("Z".toCharArray()[0]));
+    public String getContents() {
+        return compartment1.concat(compartment2);
     }
 
+    @Override
+    public String toString() {
+        return getContents();
+    }
 }
