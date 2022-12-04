@@ -27,4 +27,12 @@ public class RangeFinder {
         }
         return count;
     }
+
+    public int getNumberOfPartiallyOverlappingSections() {
+        int count = 0;
+        for (Pair<Range<Integer>, Range<Integer>> pair : sectionPairs) {
+            if (pair.getLeft().isOverlappedBy(pair.getRight())) count++;
+        }
+        return count;
+    }
 }

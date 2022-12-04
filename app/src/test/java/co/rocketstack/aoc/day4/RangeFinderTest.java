@@ -42,4 +42,19 @@ public class RangeFinderTest {
         rangeFinder.addPair(r7, r8);
         Assert.assertEquals(2, rangeFinder.getNumberOfEntirelyOverlappingSections());
     }
+
+    @Test
+    void testRangeFinderCountPartialOverlappingElements() {
+        RangeFinder rangeFinder = new RangeFinder();
+
+        Range<Integer> r1 = Range.between(5, 7);
+        Range<Integer> r2 = Range.between(7, 9);
+        rangeFinder.addPair(r1, r2);
+        Assert.assertEquals(1, rangeFinder.getNumberOfPartiallyOverlappingSections());
+
+        Range<Integer> r3 = Range.between(2, 3);
+        Range<Integer> r4 = Range.between(4, 5);
+        rangeFinder.addPair(r3, r4);
+        Assert.assertEquals(1, rangeFinder.getNumberOfPartiallyOverlappingSections());
+    }
 }
