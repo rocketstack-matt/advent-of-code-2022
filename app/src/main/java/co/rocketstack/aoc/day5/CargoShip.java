@@ -36,9 +36,25 @@ public class CargoShip {
         }
     }
 
+    public void move9001(int numberOfCrates, int fromStack, int toStack) {
+        Stack<String> tempStack = new Stack<>();
+        for (int i = 0; i < numberOfCrates; i++) {
+            tempStack.push(stacks.get(fromStack - 1).pop());
+        }
+        int count = tempStack.size();
+        for (int i = 0; i < count; i++) {
+            stacks.get(toStack - 1).push(tempStack.pop());
+        }
+    }
+
     public void move(String command) {
         String[] commands = command.split(" ");
         this.move(Integer.valueOf(commands[1]), Integer.valueOf(commands[3]), Integer.valueOf(commands[5]));
+    }
+
+    public void move9001(String command) {
+        String[] commands = command.split(" ");
+        this.move9001(Integer.valueOf(commands[1]), Integer.valueOf(commands[3]), Integer.valueOf(commands[5]));
     }
 
     public String peekAtCrateFromStack(int stack) {

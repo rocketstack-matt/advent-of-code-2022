@@ -31,4 +31,26 @@ public class Day5Test {
 
         System.out.println(ship.peekAtCrateFromAllStacks());
     }
+
+    @Test
+    void loadDay5Ship9001() throws FileNotFoundException {
+        String filepath = getClass().getResource("Day5.input").getFile();
+        Scanner scanner = new Scanner(new File(filepath));
+
+        List<String> shipContents = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.isEmpty())
+                break;
+            shipContents.add(line);
+        }
+        Collections.reverse(shipContents);
+        CargoShip ship = new CargoShip(shipContents);
+
+        while (scanner.hasNextLine()) {
+            ship.move9001(scanner.nextLine());
+        }
+
+        System.out.println(ship.peekAtCrateFromAllStacks());
+    }
 }
