@@ -2,6 +2,7 @@ package co.rocketstack.aoc.day7;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,6 +56,12 @@ public class DirectoryExplorer {
 
     public int getTotalOfDirsWithMaxSize(int maxSize) {
         return getDirsWithMaxSize(maxSize).stream().map(AOCFile::getDirectorySize).mapToInt(Integer::intValue).sum();
+    }
+
+    public AOCFile getSmallestFileBiggerThan(int size) {
+        return getDirsWithMaxSize(Integer.MAX_VALUE).stream()
+                .sorted(Comparator.comparingInt(AOCFile::getDirectorySize))
+                .filter(dir -> dir.getDirectorySize() > size).findFirst().get();
     }
 
 }

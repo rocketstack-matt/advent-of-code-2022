@@ -14,14 +14,14 @@ public class DirectoryExplorerTest {
     /**
      * The device the Elves gave you has problems with more than just its communication system. You try to run a system
      * update:
-     *
+     * <p>
      * $ system-update --please --pretty-please-with-sugar-on-top
      * Error: No space left on device
      * Perhaps you can delete some files to make space for the update?
-     *
+     * <p>
      * You browse around the filesystem to assess the situation and save the resulting terminal output (your puzzle
      * input). For example:
-     *
+     * <p>
      * $ cd /
      * $ ls
      * dir a
@@ -48,10 +48,10 @@ public class DirectoryExplorerTest {
      * The filesystem consists of a tree of files (plain data) and directories (which can contain other directories or
      * files). The outermost directory is called /. You can navigate around the filesystem, moving into or out of
      * directories and listing the contents of the directory you're currently in.
-     *
+     * <p>
      * Within the terminal output, lines that begin with $ are commands you executed, very much like some modern
      * computers:
-     *
+     * <p>
      * cd means change directory. This changes which directory is the current directory, but the specific result depends
      * on the argument:
      * cd x moves in one level: it looks in the current directory for the directory named x and makes it the current
@@ -64,21 +64,21 @@ public class DirectoryExplorerTest {
      * dir xyz means that the current directory contains a directory named xyz.
      * Given the commands and output in the example above, you can determine that the filesystem looks visually like
      * this:
-     *
+     * <p>
      * - / (dir)
-     *   - a (dir)
-     *     - e (dir)
-     *       - i (file, size=584)
-     *     - f (file, size=29116)
-     *     - g (file, size=2557)
-     *     - h.lst (file, size=62596)
-     *   - b.txt (file, size=14848514)
-     *   - c.dat (file, size=8504156)
-     *   - d (dir)
-     *     - j (file, size=4060174)
-     *     - d.log (file, size=8033020)
-     *     - d.ext (file, size=5626152)
-     *     - k (file, size=7214296)
+     * - a (dir)
+     * - e (dir)
+     * - i (file, size=584)
+     * - f (file, size=29116)
+     * - g (file, size=2557)
+     * - h.lst (file, size=62596)
+     * - b.txt (file, size=14848514)
+     * - c.dat (file, size=8504156)
+     * - d (dir)
+     * - j (file, size=4060174)
+     * - d.log (file, size=8033020)
+     * - d.ext (file, size=5626152)
+     * - k (file, size=7214296)
      * Here, there are four directories: / (the outermost directory), a and d (which are in /), and e (which is in a).
      * These directories also contain files of various sizes.
      *
@@ -95,9 +95,9 @@ public class DirectoryExplorerTest {
      * deletion. To do this, you need to determine the total size of each directory. The total size of a directory is
      * the sum of the sizes of the files it contains, directly or indirectly. (Directories themselves do not count as
      * having any intrinsic size.)
-     *
+     * <p>
      * The total sizes of the directories above can be found as follows:
-     *
+     * <p>
      * The total size of directory e is 584 because it contains a single file i of size 584 and no other directories.
      * The directory a has total size 94853 because it contains files f (size 29116), g (size 2557), and h.lst (size
      * 62596), plus file i indirectly (a contains e which contains i).
@@ -126,5 +126,42 @@ public class DirectoryExplorerTest {
     @Test
     void testGetDirTotal() {
         Assert.assertEquals(95437, explorer.getTotalOfDirsWithMaxSize(100000));
+    }
+
+    /**
+     * Now, you're ready to choose a directory to delete.
+     * <p>
+     * The total disk space available to the filesystem is 70000000. To run the update, you need unused space of at
+     * least 30000000. You need to find a directory you can delete that will free up enough space to run the update.
+     * <p>
+     * In the example above, the total size of the outermost directory (and thus the total amount of used space) is
+     * 48381165; this means that the size of the unused space must currently be 21618835, which isn't quite the 30000000
+     * required by the update. Therefore, the update still requires a directory with total size of at least 8381165 to
+     * be deleted before it can run.
+     * <p>
+     * To achieve this, you have the following options:
+     * <p>
+     * Delete directory e, which would increase unused space by 584.
+     * Delete directory a, which would increase unused space by 94853.
+     * Delete directory d, which would increase unused space by 24933642.
+     * Delete directory /, which would increase unused space by 48381165.
+     * Directories e and a are both too small; deleting them would not free up enough space. However, directories d and
+     * / are both big enough! Between these, choose the smallest: d, increasing unused space by 24933642.
+     */
+    @Test
+    void testGetSmallestFileBiggerThan() {
+        Map<String, AOCFile> directories = new HashMap<>();
+
+        for (AOCFile dir : explorer.getDirsWithMaxSize(Integer.MAX_VALUE)) {
+            directories.put(dir.getName(), dir);
+        }
+
+        int unusedSpace = 70000000 - directories.get("/").getDirectorySize();
+        Assert.assertEquals(21618835, unusedSpace);
+
+        int requiredSpace = 30000000 - unusedSpace;
+        Assert.assertEquals(8381165, requiredSpace);
+
+        Assert.assertEquals("d", explorer.getSmallestFileBiggerThan(requiredSpace).getName());
     }
 }
