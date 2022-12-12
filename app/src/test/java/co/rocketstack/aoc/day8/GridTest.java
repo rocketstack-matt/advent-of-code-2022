@@ -94,4 +94,41 @@ public class GridTest {
     void testVisibleTrees() {
         Assert.assertEquals(21, grid.getVisibleTrees());
     }
+
+    @Test
+    void testCheckVisibleTreeCountLeft() {
+        Assert.assertEquals(3, grid.checkVisibleTreeCountLeft(3, 0));
+        Assert.assertEquals(1, grid.checkVisibleTreeCountLeft(2, 1));
+        Assert.assertEquals(0, grid.checkVisibleTreeCountLeft(0, 2));
+        Assert.assertEquals(4, grid.checkVisibleTreeCountLeft(4, 3));
+    }
+
+    @Test
+    void testCheckVisibleTreeCountRight() {
+        Assert.assertEquals(2, grid.checkVisibleTreeCountRight(0, 0));
+        Assert.assertEquals(2, grid.checkVisibleTreeCountRight(2, 1));
+        Assert.assertEquals(0, grid.checkVisibleTreeCountRight(4, 1));
+        Assert.assertEquals(4, grid.checkVisibleTreeCountRight(0, 2));
+    }
+
+    @Test
+    void testCheckVisibleTreeCountAbove() {
+        Assert.assertEquals(1, grid.checkVisibleTreeCountAbove(4, 4));
+        Assert.assertEquals(3, grid.checkVisibleTreeCountAbove(4, 3));
+        Assert.assertEquals(0, grid.checkVisibleTreeCountAbove(4, 0));
+        Assert.assertEquals(2, grid.checkVisibleTreeCountAbove(1, 4));
+    }
+
+    @Test
+    void testCheckVisibleTreeCountBelow() {
+        Assert.assertEquals(3, grid.checkVisibleTreeCountBelow(4, 0));
+        Assert.assertEquals(0, grid.checkVisibleTreeCountBelow(0, 4));
+        Assert.assertEquals(2, grid.checkVisibleTreeCountBelow(2, 1));
+        Assert.assertEquals(4, grid.checkVisibleTreeCountBelow(3, 0));
+    }
+
+    @Test
+    void testCheckMaxScenicScore() {
+        Assert.assertEquals(8, grid.calculateMaxScenicScore());
+    }
 }

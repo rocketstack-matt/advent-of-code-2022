@@ -109,4 +109,79 @@ public class Grid {
         }
         return count;
     }
+
+    public int calculateMaxScenicScore() {
+        int maxScore = 0;
+        for (int x = 0; x < trees.get(0).size(); x++) {
+            int scoreLeft = 0;
+            int scoreRight = 0;
+            int scoreAbove = 0;
+            int scoreBelow = 0;
+            for (int y = 0; y < trees.size(); y++) {
+                scoreLeft = checkVisibleTreeCountLeft(x, y);
+                scoreRight = checkVisibleTreeCountRight(x, y);
+                scoreAbove = checkVisibleTreeCountAbove(x, y);
+                scoreBelow = checkVisibleTreeCountBelow(x, y);
+                if (scoreLeft * scoreRight * scoreAbove * scoreBelow > maxScore)
+                    maxScore = scoreLeft * scoreRight * scoreAbove * scoreBelow;
+            }
+        }
+        return maxScore;
+    }
+
+    int checkVisibleTreeCountLeft(int x, int y) {
+        int score = 0;
+        for (int newX = x - 1; newX >= 0; newX--) {
+            if (get(newX, y) < get(x, y))
+                score++;
+            if (get(newX, y) >= get(x, y)) {
+                // We can see no farther left
+                score++;
+                break;
+            }
+        }
+        return score;
+    }
+
+    int checkVisibleTreeCountRight(int x, int y) {
+        int score = 0;
+        for (int newX = x + 1; newX < trees.get(y).size(); newX++) {
+            if (get(newX, y) < get(x, y))
+                score++;
+            if (get(newX, y) >= get(x, y)) {
+                // We can see no farther left
+                score++;
+                break;
+            }
+        }
+        return score;
+    }
+
+    int checkVisibleTreeCountAbove(int x, int y) {
+        int score = 0;
+        for (int newY = y - 1; newY >= 0; newY--) {
+            if (get(x, newY) < get(x, y))
+                score++;
+            if (get(x, newY) >= get(x, y)) {
+                // We can see no farther left
+                score++;
+                break;
+            }
+        }
+        return score;
+    }
+
+    int checkVisibleTreeCountBelow(int x, int y) {
+        int score = 0;
+        for (int newY = y + 1; newY < trees.size(); newY++) {
+            if (get(x, newY) < get(x, y))
+                score++;
+            if (get(x, newY) >= get(x, y)) {
+                // We can see no farther left
+                score++;
+                break;
+            }
+        }
+        return score;
+    }
 }

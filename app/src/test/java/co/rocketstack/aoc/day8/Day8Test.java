@@ -18,5 +18,6 @@ public class Day8Test {
         }
 
         System.out.println(grid.getVisibleTrees());
+        System.out.println(grid.calculateMaxScenicScore());
     }
 }
